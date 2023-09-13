@@ -20,7 +20,7 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#contac">Contac</a></li>
+                    <li><a href="#contact">Contact</a></li>
                     <li><a href="cv">CV</a><li>
                 </ul>
             </nav>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </main>
-            <footer id="contac">
+            <footer id="contact">
                 <P class="penutup">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ipsum minus magnam laudantium, aperiam cupiditate mollitia. 
                     Praesentium iure quidem perferendis consequatur inventore reiciendis ad magnam debitis eaque fuga! Accusamus, deserunt!</P>
                 <div class="fot-row">
