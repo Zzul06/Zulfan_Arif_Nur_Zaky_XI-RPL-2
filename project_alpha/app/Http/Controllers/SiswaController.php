@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Siswa;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Validation\Rule;
 
 
 class SiswaController extends Controller
@@ -22,7 +23,6 @@ class SiswaController extends Controller
 
     public function store(Request $request)
     {
-        Alert::success('Data Berhasil Ditambah!', 'Success!');
         $request->validate([
             'nis' => 'required|numeric|unique:siswa',
             'nama' => 'required',
@@ -33,6 +33,7 @@ class SiswaController extends Controller
             'no_tlp' => 'required|numeric'
         ]);
         Siswa::create($request->all());
+        toast('Data Berhasil Ditambah!', 'success')->position('bottom');
         return redirect()->route('siswa.index');
     }
 
@@ -49,26 +50,31 @@ class SiswaController extends Controller
 
     public function update(Request $request,$nis)
     {   
-        Alert::success('Data Berhasil Di Ubah!', 'Data Di Ubah!');
-        $siswa = Siswa::find($nis);
-        $request->validate([
-            'nis' => 'required|numeric|unique:siswa',
-            'nama' => 'required|string',
-            'jenis_kelamin' => 'required',
-            'tmpt_lahir' => 'required|string',
-            'tgl_lahir' => 'required|date',
-            'alamat' => 'required',
-            'no_tlp' => 'required|numeric'
+        $siswa = Siswa::FindorFail($nis);
+
+        $validasi = $request->validate([
+            "nis" => [
+                "required",
+                Rule::unique('siswa','nis')->ignore($nis, 'nis'),
+            ],
+                'nama' => 'required|string',
+                'jenis_kelamin' => 'required',
+                'tmpt_lahir' => 'required|string',
+                'tgl_lahir' => 'required|date',
+                'alamat' => 'required',
+                'no_tlp' => 'required|numeric'
         ]);
-        $siswa->update($request->all());
+
+        Siswa::where("nis", $siswa->nis)->update($validasi);
+        toast('Data Berhasil Diuabah!', 'success')->position('bottom');
         return redirect()->route('siswa.index');
     }
 
     public function destroy($nis)
     {
-        Alert::success('Data Berhasil Di Delete!', 'Data Di Delete!');
         $siswa = Siswa::find($nis);
         $siswa->delete();
+        toast('Data Berhasil Di Delete!', 'success')->position('bottom');
         return redirect()->route('siswa.index');
     }
 }

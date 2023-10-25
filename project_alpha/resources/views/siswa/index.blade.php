@@ -18,7 +18,7 @@
         <div class="container">
         @include('sweetalert::alert')
             <div class="wrap">
-                <a href="{{ route('siswa.create')}}"><button class="but-tambahdata">Tambah Data</button></a>
+                <a href="{{ route('siswa.create')}}"><button class="but-tambahdata">Tambah Data +</button></a>
                 <table>
                     <thead>
                         <th>NIS</th>
