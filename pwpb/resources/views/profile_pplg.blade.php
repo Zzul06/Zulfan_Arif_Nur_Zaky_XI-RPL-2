@@ -71,7 +71,6 @@
                         <h2>Judul</h2>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                     </div>
-
                 </div>    
                 <p class="copyright">&copy; copyright 2023 zulfan</p>
             </footer>

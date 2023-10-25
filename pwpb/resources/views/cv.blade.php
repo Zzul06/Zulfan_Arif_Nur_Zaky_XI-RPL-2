@@ -181,12 +181,13 @@
     </style>    
 </head>
 <body>
+    @foreach ($siswa as $data)
     <div class="back">
         <a href="profile_pplg"><i class="fa-solid fa-arrow-left"></i>Back</a>
     </div>
         <div class="container">
                 <div class="box-ver">
-                    <img src="{{ asset('img/zulfan.jpg') }}">
+                    <img src="{{ asset('img/' . $data->img) }}" alt="foto saya">
                     <div class="line-ver">
                         <h1>Zulfan Arif Nur Zaky</h1>
                         <h4>Web Developer</h4>
@@ -196,17 +197,17 @@
                 <div class="box-hor">
                         <h2>Profile</h2>
                             <span>Tanggal Lahir:</span>
-                                <p>Bandung, 06 Mei 2006</p>
+                                <p>{{ $data->tgl_lahir }}</p>
                             <span>Umur:</span>   
-                                <p>17 Tahun</p> 
+                                <p>{{ $data->umur }}</p> 
                             <span>Hobi:</span>
-                                <p>• Olahraga</p>
-                                <p>• Menonton Film</p>
+                                <p>{{ $data->hobi}}</p>
                             <span>Alamat:</span>
-                                <p>Kp.Pasirkaliki Reuma No.26, RT.08, RW.19, Kec.Coblong, Kota Bandung.</p>
+                                <p>{{ $data->alamat }}</p>
                             <span>Media Sosial:</span>
                                 <a href="https://www.instagram.com/zlfnarif_/?next=%2F">
                                 <i class="fa-brands fa-instagram"></i></a>
+                        
                 </div>            
                 <div class="box">
                     <div class="wrap-riw">
@@ -217,12 +218,13 @@
                     </div>                
                         <h2>Kontak</h2>
                     <div class="kontak">
-                                <a href="tel:+6282119757291"><i class="fa-solid fa-phone"></i><span>:0821-1975-7291</span></a>
+                                <a href="tel:{{$data->notlp}}"><i class="fa-solid fa-phone"></i><span>+6282119757291</span></a>
                                     <br>
-                                <a href="mailto: nurzaky2006@gmail.com"><i class="fa-solid fa-envelope"></i><span>:nurzaky2006@gmail.com</span></a>
+                                <a href="mailto:{{$data->email}}"><i class="fa-solid fa-envelope"></i><span>:nurzaky2006@gmail.com</span></a>
                     </div>            
                 </div> 
             </div>                       
         </div>
+        @endforeach
 </body>
 </html>

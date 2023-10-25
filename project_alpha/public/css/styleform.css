@@ -1,0 +1,36 @@
+.wrap-form {
+    width: 50%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #b1b1b1fb;
+    border-radius: 5px;
+    
+}
+
+form {
+    margin: auto;
+    padding: 8px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input ,textarea{
+    resize: none;
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+form select {
+    width: 99%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}

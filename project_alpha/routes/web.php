@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\siswacontroller;
+use App\Http\controllers\SiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,13 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/cv', function () {
-//     return view('cv');
-// });
-
-Route::get('/cv', [siswacontroller::class, 'index']);
-
-
-Route::get('/profile_pplg', function () {
-    return view('profile_pplg');
-});
+Route::resource('siswa', SiswaController::class);
