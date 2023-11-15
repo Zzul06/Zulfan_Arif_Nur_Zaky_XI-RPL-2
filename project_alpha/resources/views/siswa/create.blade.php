@@ -22,13 +22,13 @@
                 <form method="POST" action="{{ route('siswa.store')}}">
                     @csrf
                     <label for="nis">Nis:</label>
-                        <input type="number" name="nis" id="nis" required>
+                        <input type="number" name="nis" id="nis" autocomplete="off" required>
                         @error('nis')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
 
                     <label for="nama">Nama:</label>
-                        <input type="text" name="nama" id="nama" required>
+                        <input type="text" name="nama" id="nama" autocomplete="off" required>
                         @error('nama')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
@@ -43,25 +43,25 @@
                         @enderror
 
                     <label for="tmpt_lahir">Tempat Lahir:</label>
-                        <input type="text" name="tmpt_lahir" id="tmpt_lahir" required>
+                        <input type="text" name="tmpt_lahir" id="tmpt_lahir" autocomplete="off" required>
                         @error('tmpt_lahir')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
 
                     <label for="tgl_lahir">Tanggal Lahir:</label>
-                        <input type="date" name="tgl_lahir" id="tgl_lahir" required>
+                        <input type="date" name="tgl_lahir" id="tgl_lahir" autocomplete="off" required>
                         @error('tgl_lahir')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
 
                     <label for="alamat">Alamat:</label>
-                        <textarea name="alamat" id="alamat"  cols="30" rows="5"required></textarea>
+                        <textarea name="alamat" id="alamat"  cols="30" rows="5"  required></textarea>
                         @error('alamat')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
 
                     <label for="no_tlp">No Telepon:</label>
-                        <input type="number" name="no_tlp" id="no_tlp" required>
+                        <input type="number" name="no_tlp" id="no_tlp" autocomplete="off" required>
                         @error('no_tlp')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
