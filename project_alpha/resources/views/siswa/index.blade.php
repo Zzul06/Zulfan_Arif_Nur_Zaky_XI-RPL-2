@@ -36,7 +36,7 @@
                         <td>{{ $data->nis }}<br></td>
                         <td>{{ $data->nama }}<br></td>
                         <td>{{ $data->jenis_kelamin }}<br></td>
-                        <td>{{ $data->tmpt_lahir }}<br></td>
+                        <td>{{ $data->tmpt_lahir }}<br></td>  
                         <td>{{ $data->tgl_lahir }}</td>
                         <td>{{ $data->alamat }}</td>
                         <td>{{ $data->no_tlp }}</td>
@@ -44,11 +44,7 @@
                             <a href="{{ route('siswa.edit',$data->nis)}}"><button class="but-edit">Edit</button></a>
                         </td>
                         <td>
-                            <form action="{{ route('siswa.destroy', $data->nis)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="but-delete" type="submit" onclick="return confirm ('Data ini akan di hapus!!, Anda yakin untuk menghapus data ini?')">Delete</button>
-                            </form>
+                            <button class="but-delete"><a href="{{ route('siswa.destroy', $data->nis) }}"  data-confirm-delete="true">Delete</a></button>
                         </td>
                     </tr>
                     @endforeach 

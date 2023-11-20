@@ -13,13 +13,14 @@
         <title>Edit</title>
     </head>
     <body>
+        @include('sweetalert::alert')
         <div class="judul">
             <h2>Edit Data</h2>
         </div>
         <div class="container">
             <div class="wrap-form">
                 <a href="{{ route('siswa.index')}}"><button class="but-kembali">Kembali</button></a>
-                <form method="POST" action="{{ route('siswa.update', $siswa)}}">
+                <form method="POST" id="update" action="{{ route('siswa.update', $siswa)}}">
                     @csrf
                     @method('PUT')
                     <label for="nis">Nis:</label>
@@ -67,10 +68,28 @@
                         @error('no_tlp')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
-
-                    <button type="submit" class="but-simpan" onclick="return confirm ('Data ini akan Disimpan!, Anda yakin  untuk menyimpan data ?')">Simpan</button>
+                    <button type="submit" id="simpan" class="but-simpan">Simpan</button>
                 </form>
             </div>
         </div>
+        <script>
+        document.getElementById('simpan').addEventListener('click', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Ubah Data',
+                text: 'Apakah Anda yakin?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#4fc40c',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('update').submit();
+                }
+            });
+        });
+        </script>
     </body>
 </html>

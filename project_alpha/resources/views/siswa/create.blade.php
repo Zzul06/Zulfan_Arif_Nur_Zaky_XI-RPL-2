@@ -13,13 +13,15 @@
         <title>Tambah Data</title>
     </head>
     <body>
+        @include('sweetalert::alert')
         <div class="judul">
             <h2>Tambah Data</h2>
         </div>
         <div class="container">
+       
             <div class="wrap-form">
                 <a href="{{ route('siswa.index')}}"><button class="but-kembali">Kembali</button></a>
-                <form method="POST" action="{{ route('siswa.store')}}">
+                <form method="POST" id="store" action="{{ route('siswa.store')}}">
                     @csrf
                     <label for="nis">Nis:</label>
                         <input type="number" name="nis" id="nis" autocomplete="off" required>
@@ -28,7 +30,7 @@
                         @enderror
 
                     <label for="nama">Nama:</label>
-                        <input type="text" name="nama" id="nama" autocomplete="off" required>
+                        <input type="text" name="nama" id="nama" value="{{ @old('nama')}}" autocomplete="off" required>
                         @error('nama')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
@@ -43,37 +45,50 @@
                         @enderror
 
                     <label for="tmpt_lahir">Tempat Lahir:</label>
-                        <input type="text" name="tmpt_lahir" id="tmpt_lahir" autocomplete="off" required>
+                        <input type="text" name="tmpt_lahir" id="tmpt_lahir" value="{{ @old('tmpt_lahir')}}" autocomplete="off" required>
                         @error('tmpt_lahir')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
 
                     <label for="tgl_lahir">Tanggal Lahir:</label>
-                        <input type="date" name="tgl_lahir" id="tgl_lahir" autocomplete="off" required>
+                        <input type="date" name="tgl_lahir" id="tgl_lahir" value="{{ @old('tgl_lahir')}}" autocomplete="off" required>
                         @error('tgl_lahir')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
 
                     <label for="alamat">Alamat:</label>
-                        <textarea name="alamat" id="alamat"  cols="30" rows="5"  required></textarea>
+                        <textarea name="alamat" id="alamat"  cols="30" rows="5"  required>{{ @old('alamat')}}</textarea>
                         @error('alamat')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
 
                     <label for="no_tlp">No Telepon:</label>
-                        <input type="number" name="no_tlp" id="no_tlp" autocomplete="off" required>
+                        <input type="number" name="no_tlp" id="no_tlp" value="{{ @old('no_tlp')}}" autocomplete="off" required>
                         @error('no_tlp')
                             <div style="color: red;">{{ $message }}</div>
                         @enderror
-
-                    <button type="submit" class="but-simpan" onclick="return confirm ('Data ini akan disimpan!, Anda yakin  untuk menambahkan data ?')">Tambah</button>
+                    <button type="submit" id="simpan" class="but-simpan">Tambah</button>
                 </form>
             </div>
         </div>
-        @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-        @endif
+        <script>
+        document.getElementById('simpan').addEventListener('click', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Tambah Data',
+                text: 'Apakah Anda yakin?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#29b272',
+                cancelButtonColor: '##ff0f27',
+                confirmButtonText: 'Ya!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('store').submit();
+                }
+            });
+        });
+    </script>
     </body>
 </html>

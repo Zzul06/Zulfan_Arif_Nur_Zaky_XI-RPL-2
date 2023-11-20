@@ -13,26 +13,39 @@ class SiswaController extends Controller
     public function index()
     {
         $siswa = siswa::all();
+        $title = 'Hapus Data Siswa!';
+        $text = "Apakah Anda yakin?";
+        confirmDelete($title, $text);
         return view('siswa.index', compact('siswa'));
     }
 
     public function create()
     {
+        confirmDelete();
         return view('siswa.create');
     }
 
     public function store(Request $request)
     {
+        $messages = [
+            'required' => '*wajib diisi.',
+            'alpha' => '*hanya boleh berisi huruf.',
+            'numeric' => '* hanya boleh berisi angka',
+            'unique' => '*:attribute sudah dipakai'
+        ];
+
         $request->validate([
             'nis' => 'required|numeric|unique:siswa',
-            'nama' => 'required',
+            'nama' => 'required|alpha',
             'jenis_kelamin' => 'required',
-            'tmpt_lahir' => 'required|string',
+            'tmpt_lahir' => 'required|alpha',
             'tgl_lahir' => 'required|date',
             'alamat' => 'required',
             'no_tlp' => 'required|numeric'
-        ]);
+        ], $messages);
+        
         Siswa::create($request->all());
+        
         toast('Data Berhasil Ditambah!', 'success')->position('bottom');
         return redirect()->route('siswa.index');
     }
@@ -44,12 +57,21 @@ class SiswaController extends Controller
 
     public function edit($nis)
     {
+        confirmDelete();
+
         $siswa = Siswa::find($nis);
         return view('siswa.edit', compact('siswa'));
     }
 
     public function update(Request $request,$nis)
     {   
+        $messages = [
+            'required' => '*wajib diisi.',
+            'alpha' => '* hanya boleh berisi huruf.',
+            'numeric' => '*  hanya boleh berisi angka',
+            'unique' => '*:attribute sudah dipakai'
+        ];
+
         $siswa = Siswa::FindorFail($nis);
 
         $validasi = $request->validate([
@@ -57,13 +79,13 @@ class SiswaController extends Controller
                 "required",
                 Rule::unique('siswa','nis')->ignore($nis, 'nis'),
             ],
-                'nama' => 'required|string',
+                'nama' => 'required|alpha',
                 'jenis_kelamin' => 'required',
-                'tmpt_lahir' => 'required|string',
+                'tmpt_lahir' => 'required|alpha',
                 'tgl_lahir' => 'required|date',
                 'alamat' => 'required',
                 'no_tlp' => 'required|numeric'
-        ]);
+        ], $messages);
 
         Siswa::where("nis", $siswa->nis)->update($validasi);
         toast('Data Berhasil Diuabah!', 'success')->position('bottom');

@@ -22,7 +22,7 @@
 }
 
 .wrap {
-    margin: 20px;
+    margin: auto;
 }
 
 table {
@@ -132,4 +132,17 @@ table tr:nth-child(even) {
 
 .but-delete:hover {
     background-color: #880916;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+div.swal2-actions button.swal2-confirm {
+    background-color: #29b272;
+}
+
+div.swal2-actions button.swal2-cancel {
+    background-color: #ff0f27;
 }
