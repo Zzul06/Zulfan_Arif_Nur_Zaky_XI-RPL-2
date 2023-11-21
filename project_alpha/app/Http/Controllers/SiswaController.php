@@ -31,12 +31,13 @@ class SiswaController extends Controller
             'required' => '*wajib diisi.',
             'alpha' => '*hanya boleh berisi huruf.',
             'numeric' => '* hanya boleh berisi angka',
-            'unique' => '*:attribute sudah dipakai'
+            'unique' => '*:attribute sudah dipakai',
+            'regex' => '*hanya boleh berisi huruf'
         ];
 
         $request->validate([
             'nis' => 'required|numeric|unique:siswa',
-            'nama' => 'required|alpha',
+            'nama' => 'required|regex:/^[a-zA-Z ]+$/',
             'jenis_kelamin' => 'required',
             'tmpt_lahir' => 'required|alpha',
             'tgl_lahir' => 'required|date',
@@ -69,7 +70,8 @@ class SiswaController extends Controller
             'required' => '*wajib diisi.',
             'alpha' => '* hanya boleh berisi huruf.',
             'numeric' => '*  hanya boleh berisi angka',
-            'unique' => '*:attribute sudah dipakai'
+            'unique' => '*:attribute sudah dipakai',
+            'regex' => '*hanya boleh berisi huruf'
         ];
 
         $siswa = Siswa::FindorFail($nis);
@@ -79,7 +81,7 @@ class SiswaController extends Controller
                 "required",
                 Rule::unique('siswa','nis')->ignore($nis, 'nis'),
             ],
-                'nama' => 'required|alpha',
+                'nama' => 'required|regex:/^[a-zA-Z ]+$/',
                 'jenis_kelamin' => 'required',
                 'tmpt_lahir' => 'required|alpha',
                 'tgl_lahir' => 'required|date',
